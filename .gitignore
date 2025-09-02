@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Compiled binary addons
+build/Release
+
+
+# Optional npm cache directory
+.npm
+
+# Optional REPL history
+.node_repl_history
+
+
+# Temporary folders
+tmp/
+temp/
+
+# Logs
+logs
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

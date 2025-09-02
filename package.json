@@ -1,0 +1,18 @@
+{
+  "name": "breakout-game",
+  "version": "1.0.0",
+  "description": "JavaScript Breakout Game based on MDN tutorial",
+  "main": "index.html",
+  "scripts": {
+    "lint": "eslint *.js",
+    "lint:fix": "eslint *.js --fix",
+    "format": "prettier --write *.{js,html,css,md}"
+  },
+  "keywords": ["game", "canvas", "javascript", "breakout"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  }
+}
