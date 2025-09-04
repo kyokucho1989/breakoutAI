@@ -7,3 +7,7 @@ MDNのチュートリアルを参考にブロック崩しゲームを作りま�
 https://developer.mozilla.org/ja/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript
 
 ただ、Claude Codeを取り入れることで独自のコードを追加することにします。
+
+## 確認方法
+
+VS Code Liver Serverを利用
