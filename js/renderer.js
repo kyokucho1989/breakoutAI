@@ -2,14 +2,26 @@ class Renderer {
   constructor(ctx) {
     this.ctx = ctx;
   }
-  render(balls) {
-    balls.forEach((ball) => this.renderSingle(ball));
+  
+  render(balls, paddle) {
+    balls.forEach((ball) => this.renderBall(ball));
+    if (paddle) {
+      this.renderPaddle(paddle);
+    }
   }
 
-  renderSingle(ball) {
+  renderBall(ball) {
     this.ctx.beginPath();
     this.ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
     this.ctx.fillStyle = ball.color;
+    this.ctx.fill();
+    this.ctx.closePath();
+  }
+
+  renderPaddle(paddle) {
+    this.ctx.beginPath();
+    this.ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
+    this.ctx.fillStyle = paddle.color;
     this.ctx.fill();
     this.ctx.closePath();
   }
