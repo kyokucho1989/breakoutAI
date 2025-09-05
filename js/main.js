@@ -22,6 +22,7 @@ function gameLoop() {
   });
 
   renderer.render(balls, paddle);
+  requestAnimationFrame(gameLoop);
 }
 
-setInterval(gameLoop, 10);
+requestAnimationFrame(gameLoop);
