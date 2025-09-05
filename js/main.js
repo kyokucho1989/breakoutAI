@@ -10,7 +10,10 @@ const balls = [new Ball(canvas.width / 2, canvas.height - 30, 2, -2)];
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  balls.forEach((ball) => ball.update());
+  balls.forEach((ball) => {
+    ball.update();
+    ball.checkWallCollision(canvas.width, canvas.height);
+  });
   renderer.render(balls);
 }
 
