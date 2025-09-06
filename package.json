@@ -4,6 +4,9 @@
   "description": "JavaScript Breakout Game based on MDN tutorial",
   "main": "index.html",
   "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "lint": "eslint *.js",
     "lint:fix": "eslint *.js --fix",
     "format": "prettier --write *.{js,html,css,md}"
@@ -18,6 +21,9 @@
   "license": "MIT",
   "devDependencies": {
     "eslint": "^8.0.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "jest": "^29.0.0",
+    "@jest/globals": "^29.0.0",
+    "jest-environment-jsdom": "^29.0.0"
   }
 }
