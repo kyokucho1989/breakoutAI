@@ -1,20 +1,12 @@
-export default {
+module.exports = {
   testEnvironment: 'jsdom',
-  transform: {},
-  extensionsToTreatAsEsm: ['.js'],
-  globals: {
-    'ts-jest': {
-      useESM: true
-    }
+  transform: {
+    '^.+\\.js$': 'babel-jest',
   },
-  moduleNameMapping: {
-    '^(\\.{1,2}/.*)\\.js$': '$1'
-  },
-  testMatch: [
-    '**/test/**/*.test.js'
-  ],
+  moduleFileExtensions: ['js'],
+  testMatch: ['**/test/**/*.test.js'],
   collectCoverageFrom: [
     'js/**/*.js',
-    '!js/**/*.test.js'
+    '!js/main.js' // メインファイルは除外
   ]
 };
