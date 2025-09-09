@@ -19,6 +19,7 @@ function gameLoop() {
   balls.forEach((ball) => {
     ball.update();
     ball.checkWallCollision(canvas.width, canvas.height);
+    game.checkBallPaddleCollision(ball, paddle);
   });
 
   renderer.render(balls, paddle);
