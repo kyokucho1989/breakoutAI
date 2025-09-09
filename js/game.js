@@ -4,7 +4,7 @@ class Game {
     this.ctx = ctx;
     this.rightPressed = false;
     this.leftPressed = false;
-    
+
     this.setupEventListeners();
   }
 
@@ -36,6 +36,18 @@ class Game {
       paddle.moveLeft();
     }
     paddle.checkBounds(this.canvas.width);
+  }
+
+  checkBallPaddleCollision(ball, paddle) {
+    if (
+      ball.y + ball.radius > paddle.y &&
+      ball.x > paddle.x &&
+      ball.x < paddle.x + paddle.width
+    ) {
+      ball.dy = -ball.dy;
+      return true;
+    }
+    return false;
   }
 }
 
