@@ -49,6 +49,14 @@ class Game {
     }
     return false;
   }
+
+  checkGameOver(ball, height, paddle) {
+    if (ball.y > height + paddle.height) {
+      alert("game over");
+      document.location.reload();
+      clearInterval(interval);
+    }
+  }
 }
 
 export default Game;
