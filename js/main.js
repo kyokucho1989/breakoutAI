@@ -20,6 +20,7 @@ function gameLoop() {
     ball.update();
     ball.checkWallCollision(canvas.width, canvas.height);
     game.checkBallPaddleCollision(ball, paddle);
+    game.checkGameOver(ball, canvas.height, paddle);
   });
 
   renderer.render(balls, paddle);
