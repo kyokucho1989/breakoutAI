@@ -2,7 +2,7 @@ class Renderer {
   constructor(ctx) {
     this.ctx = ctx;
   }
-  
+
   render(balls, paddle) {
     balls.forEach((ball) => this.renderBall(ball));
     if (paddle) {
@@ -22,6 +22,21 @@ class Renderer {
     this.ctx.beginPath();
     this.ctx.rect(paddle.x, paddle.y, paddle.width, paddle.height);
     this.ctx.fillStyle = paddle.color;
+    this.ctx.fill();
+    this.ctx.closePath();
+  }
+
+  renderBlocks(blockGrid) {
+    blockGrid.blocks.forEach((blockRow) => {
+      blockRow.forEach((block) => {
+        this.renderBlock(block);
+      });
+    });
+  }
+  renderBlock(block) {
+    this.ctx.beginPath();
+    this.ctx.rect(block.x, block.y, block.width, block.height);
+    this.ctx.fillStyle = block.color;
     this.ctx.fill();
     this.ctx.closePath();
   }
