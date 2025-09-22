@@ -11,7 +11,7 @@ const renderer = new Renderer(ctx);
 const balls = [new Ball(canvas.width / 2, canvas.height - 30, 2, -2)];
 const paddle = new Paddle((canvas.width - 75) / 2, canvas.height - 10);
 const game = new Game(canvas, ctx);
-const blockGrid = new BlockGrid(3, 12);
+const blockGrid = new BlockGrid(canvas);
 
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
