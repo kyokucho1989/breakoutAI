@@ -44,13 +44,25 @@ class Game {
     for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
         const block = blockGrid.blocks[row][col];
+
+        // ブロックの縁で当たり判定をする
+        // ブロックの上下の縁とボールの端
         if (
           ball.y + ball.radius > block.y &&
           ball.y - ball.radius < block.y + block.height &&
           ball.x > block.x &&
           ball.x < block.x + block.width
         ) {
-          console.log(`hit:block ${col} ${row}`);
+          console.log(`hit: 上下 block: ${col} ${row}`);
+        }
+        // ブロックの左右の縁とボールの端
+        if (
+          ball.x + ball.radius > block.x &&
+          ball.x - ball.radius < block.x + block.width &&
+          ball.y > block.y &&
+          ball.y < block.y + block.height
+        ) {
+          console.log(`hit: 左右 block: ${col} ${row}`);
         }
       }
     }
