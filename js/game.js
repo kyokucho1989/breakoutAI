@@ -38,6 +38,24 @@ class Game {
     paddle.checkBounds(this.canvas.width);
   }
 
+  checkBlockCollision(ball, blockGrid) {
+    const ROWS = blockGrid.blocks.length;
+    const COLS = blockGrid.blocks[0].length;
+    for (let row = 0; row < ROWS; row++) {
+      for (let col = 0; col < COLS; col++) {
+        const block = blockGrid.blocks[row][col];
+        if (
+          ball.y + ball.radius > block.y &&
+          ball.y - ball.radius < block.y + block.height &&
+          ball.x > block.x &&
+          ball.x < block.x + block.width
+        ) {
+          console.log(`hit:block ${col} ${row}`);
+        }
+      }
+    }
+  }
+
   checkBallPaddleCollision(ball, paddle) {
     if (
       ball.y + ball.radius > paddle.y &&
