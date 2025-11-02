@@ -45,24 +45,46 @@ class Game {
       for (let col = 0; col < COLS; col++) {
         const block = blockGrid.blocks[row][col];
 
+        // const distanceBallAndPaddle
+
+        const corners = [
+          { x: block.x, y: block.y },
+          { x: block.x + block.width, y: block.y },
+          { x: block.x, y: block.y + block.height },
+          { x: block.x + block.width, y: block.y + block.height },
+        ];
+
+        const distances = corners.map((corner) => {
+          const dx = ball.x - corner.x;
+          const dy = ball.y - corner.y;
+          return Math.sqrt(dx * dx + dy * dy);
+        });
+
+        const minDistance = Math.min(...distances);
+        // const minDistanceOfBallAndPaddle =
+
         // ブロックの縁で当たり判定をする
         // ブロックの上下の縁とボールの端
         if (
-          ball.y + ball.radius > block.y &&
-          ball.y - ball.radius < block.y + block.height &&
-          ball.x > block.x &&
-          ball.x < block.x + block.width
+          (ball.y + ball.radius > block.y &&
+            ball.y - ball.radius < block.y + block.height &&
+            ball.x > block.x &&
+            ball.x < block.x + block.width) ||
+          minDistance < ball.radius
         ) {
           console.log(`hit: 上下 block: ${col} ${row}`);
+          ball.dy = -ball.dy;
         }
         // ブロックの左右の縁とボールの端
         if (
-          ball.x + ball.radius > block.x &&
-          ball.x - ball.radius < block.x + block.width &&
-          ball.y > block.y &&
-          ball.y < block.y + block.height
+          (ball.x + ball.radius > block.x &&
+            ball.x - ball.radius < block.x + block.width &&
+            ball.y > block.y &&
+            ball.y < block.y + block.height) ||
+          minDistance < ball.radius
         ) {
           console.log(`hit: 左右 block: ${col} ${row}`);
+          ball.dx = -ball.dx;
         }
       }
     }
