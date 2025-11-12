@@ -38,68 +38,71 @@ class Game {
     paddle.checkBounds(this.canvas.width);
   }
 
+  checkBallCollision(ball, rect) {
+    const rectLeft = rect.x;
+    const rectRight = rect.x + rect.width;
+    const rectTop = rect.y;
+    const rectBottom = rect.y + rect.height;
+
+    const ballLeft = ball.x - ball.radius;
+    const ballRight = ball.x + ball.radius;
+    const ballTop = ball.y - ball.radius;
+    const ballBottom = ball.y + ball.radius;
+
+    const corners = [
+      { x: rectLeft, y: rectTop },
+      { x: rectRight, y: rectTop },
+      { x: rectLeft, y: rectBottom },
+      { x: rectRight, y: rectBottom },
+    ];
+
+    const distances = corners.map((corner) => {
+      const dx = ball.x - corner.x;
+      const dy = ball.y - corner.y;
+      return Math.sqrt(dx * dx + dy * dy);
+    });
+
+    const minDistance = Math.min(...distances);
+
+    if (rectLeft < ball.x && ball.x < rectRight) {
+      if (
+        (rectTop < ballBottom && ballTop < rectTop) ||
+        (ballTop < rectBottom && rectBottom < ballBottom)
+      ) {
+        ball.dy = -ball.dy;
+        return true;
+      }
+    }
+
+    if (ball.y > rectTop && ball.y < rectBottom) {
+      if (ballRight > rectLeft && ballLeft < rectRight) {
+        ball.dx = -ball.dx;
+        return true;
+      }
+    }
+
+    if (minDistance < ball.radius) {
+      ball.dx = -ball.dx;
+      ball.dy = -ball.dy;
+      return true;
+    }
+
+    return false;
+  }
   checkBlockCollision(ball, blockGrid) {
     const ROWS = blockGrid.blocks.length;
     const COLS = blockGrid.blocks[0].length;
     for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
         const block = blockGrid.blocks[row][col];
-
-        // const distanceBallAndPaddle
-
-        const corners = [
-          { x: block.x, y: block.y },
-          { x: block.x + block.width, y: block.y },
-          { x: block.x, y: block.y + block.height },
-          { x: block.x + block.width, y: block.y + block.height },
-        ];
-
-        const distances = corners.map((corner) => {
-          const dx = ball.x - corner.x;
-          const dy = ball.y - corner.y;
-          return Math.sqrt(dx * dx + dy * dy);
-        });
-
-        const minDistance = Math.min(...distances);
-        // const minDistanceOfBallAndPaddle =
-
-        // ブロックの縁で当たり判定をする
-        // ブロックの上下の縁とボールの端
-        if (
-          (ball.y + ball.radius > block.y &&
-            ball.y - ball.radius < block.y + block.height &&
-            ball.x > block.x &&
-            ball.x < block.x + block.width) ||
-          minDistance < ball.radius
-        ) {
-          console.log(`hit: 上下 block: ${col} ${row}`);
-          ball.dy = -ball.dy;
-        }
-        // ブロックの左右の縁とボールの端
-        if (
-          (ball.x + ball.radius > block.x &&
-            ball.x - ball.radius < block.x + block.width &&
-            ball.y > block.y &&
-            ball.y < block.y + block.height) ||
-          minDistance < ball.radius
-        ) {
-          console.log(`hit: 左右 block: ${col} ${row}`);
-          ball.dx = -ball.dx;
-        }
+        const hit = this.checkBallCollision(ball, block);
       }
     }
   }
 
   checkBallPaddleCollision(ball, paddle) {
-    if (
-      ball.y + ball.radius > paddle.y &&
-      ball.x > paddle.x &&
-      ball.x < paddle.x + paddle.width
-    ) {
-      ball.dy = -ball.dy;
-      return true;
-    }
-    return false;
+    const hit = this.checkBallCollision(ball, paddle);
+    return hit;
   }
 
   checkGameOver(ball, height, paddle) {
