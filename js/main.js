@@ -17,11 +17,11 @@ function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   game.handlePaddleMovement(paddle);
-
   balls.forEach((ball) => {
     ball.update();
     ball.checkWallCollision(canvas.width, canvas.height);
     game.checkBallPaddleCollision(ball, paddle);
+    game.checkBlockCollision(ball, blockGrid);
     game.checkGameOver(ball, canvas.height, paddle);
   });
 
