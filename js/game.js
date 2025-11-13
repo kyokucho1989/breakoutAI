@@ -95,7 +95,12 @@ class Game {
     for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
         const block = blockGrid.blocks[row][col];
-        const hit = this.checkBallCollision(ball, block);
+        if (block.life !== 0) {
+          const hit = this.checkBallCollision(ball, block);
+          if (hit) {
+            block.life = block.life - 1;
+          }
+        }
       }
     }
   }

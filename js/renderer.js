@@ -29,7 +29,9 @@ class Renderer {
   renderBlocks(blockGrid) {
     blockGrid.blocks.forEach((blockRow) => {
       blockRow.forEach((block) => {
-        this.renderBlock(block);
+        if (block.life !== 0) {
+          this.renderBlock(block);
+        }
       });
     });
   }
